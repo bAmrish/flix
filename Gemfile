@@ -8,6 +8,12 @@ gem "rails", "~> 7.1.5", ">= 7.1.5.1"
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
 gem "sprockets-rails"
 
+# Bootstrap css gem for Rails [https://github.com/twbs/bootstrap-rubygem]
+gem 'bootstrap', '~> 5.3.3'
+
+# SCSS engine required by bootstrap to process scss files [https://github.com/tablecheck/dartsass-sprockets]
+gem 'dartsass-sprockets', '~> 3.2.0'
+
 # Use sqlite3 as the database for Active Record
 gem "sqlite3", ">= 1.4"
 

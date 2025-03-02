@@ -3,7 +3,7 @@ module MoviesHelper
     if movie.flop?
       "Flop"
     else
-      number_to_currency(movie.total_gross, precision: 0, unit: "INR ")
+      number_to_currency(movie.total_gross, precision: 0, unit: "USD ")
     end
   end
 
