@@ -38,3 +38,6 @@
 .vscode/
 .idea/
 *.iml
+
+# OS Specific files
+*.DS_Store

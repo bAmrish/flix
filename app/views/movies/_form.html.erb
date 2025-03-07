@@ -1,4 +1,5 @@
-<%= form_with(model: movie) do |f|%>
+<%= form_with(model: movie) do |f| %>
+  <%= render 'shared/errors', object: movie%>
   <%= f.label :title %>
   <%= f.text_field :title, autofocus: true %>
 
@@ -6,7 +7,7 @@
   <%= f.text_area :description, rows: 5 %>
 
   <%= f.label :rating %>
-  <%= f.text_field :rating %>
+  <%= f.select :rating, Movie::RATINGS, prompt: 'Please select one' %>
 
   <%= f.label :total_gross %>
   <%= f.number_field :total_gross, step: 1 %>
