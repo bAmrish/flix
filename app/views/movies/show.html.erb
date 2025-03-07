@@ -7,6 +7,9 @@
       <h2> 
         <%= release_date(@movie) %> &bull; <%= @movie.rating%>
       </h2>
+        <div class="review">
+        <%= link_to pluralize(@movie.reviews.size, 'Review'), movie_reviews_path(@movie) %>
+      </div>
       <p>
         <%= @movie.description%>
       </p>
