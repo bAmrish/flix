@@ -14,7 +14,8 @@
           <%= review.comment %> 
         </p>
         <p class="review">
-          <%= link_to 'Edit', edit_movie_review_path(@movie, review) %>
+          <%= link_to 'Edit', edit_movie_review_path(@movie, review) %> &bull; 
+          <%= link_to 'Delete', [@movie, review], data: {turbo_method: :delete, turbo_confirm: 'Are you sure?'} %>
         </p> 
       </li>
     <% end %>
