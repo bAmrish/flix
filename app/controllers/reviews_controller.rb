@@ -17,6 +17,21 @@ class ReviewsController < ApplicationController
       render :new, status: :unprocessable_entity
     end
   end
+
+  def edit
+    review_id = params[:id]
+    @review = Review.find(review_id)
+  end
+
+  def update
+    review_id = params[:id]
+    @review = Review.find_by(movie: @movie, id: review_id)
+    if @review.update(review_params)
+      redirect_to movie_reviews_path(@movie), notice: 'Review updated successfully!'
+    else
+      render :edit, status: :unprocessable_entity
+    end
+  end
 private
 
   def set_movie
