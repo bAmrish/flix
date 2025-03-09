@@ -7,9 +7,9 @@
       <h2> 
         <%= release_date(@movie) %> &bull; <%= @movie.rating%>
       </h2>
-        <div class="review">
+      <div class="review">
         <%= link_to pluralize(@movie.reviews.size, 'Review'), movie_reviews_path(@movie) %>
-      </div>
+      </div>      
       <p>
         <%= @movie.description%>
       </p>
@@ -27,6 +27,9 @@
           <td><%= total_gross(@movie)%></td>
         </tr>
       </table>
+      <div class="review">
+        <%= link_to 'Add Review', new_movie_review_path(@movie)%>
+      </div>
   </div>
 </section>
 <section class="admin">
