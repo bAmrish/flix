@@ -32,4 +32,12 @@ class Movie < ApplicationRecord
       "0.0"
     end
   end
+
+  def average_stars_percent
+    if reviews.size > 0
+      (reviews.average(:stars) * 100) / Review::STARS.size
+    else
+      0
+    end
+  end
 end
