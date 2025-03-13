@@ -526,6 +526,13 @@ form:not([class="button_to"]) {
   }
 }
 
+form > div.username {
+  padding: 2px;
+  font-weight: 500;
+  margin-bottom: 10px;
+  font-size: 1.3rem;
+}
+
 // Flashes
 
 .flash {

@@ -1,5 +1,11 @@
 <%= form_with(model: user) do |f| %>
   <%= render 'shared/errors', object: user %>
+  <%= f.label :username %>
+  <% if user.new_record? %>
+    <%= f.text_field :username %>
+  <% else %>
+    <div class='username'> <%= @user.username %> </div>
+  <% end %>
   <%= f.label :name %>
   <%= f.text_field :name %>
   <%= f.label :email %>

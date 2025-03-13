@@ -3,6 +3,19 @@ class User < ApplicationRecord
   has_secure_password
   BASE_GRAVATAR_IMAGE = 'https://gravatar.com/avatar'
 
+  validates :username, 
+    presence: true, 
+    uniqueness: {
+      case_sensitive: false
+    }, 
+    length: {
+      minimum: 4,
+      maximum: 20
+    },
+    format: {
+      with: /\A[a-zA-Z0-9\.]+\z/i,
+      message: 'should only contains letters, numbers and period'
+    }
   validates :name, presence: true
   validates :email, format: { with: /\S+@\S+/},
             uniqueness: {case_sensitive: false}
