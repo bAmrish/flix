@@ -588,3 +588,9 @@ section.errors {
     top: 0;
   }
 }
+
+.profile-image {
+  width: 70px;
+  clip-path: inset(0 round 50px);
+  object-fit: cover;
+}
