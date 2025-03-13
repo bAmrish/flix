@@ -6,7 +6,7 @@ class User < ApplicationRecord
   validates :name, presence: true
   validates :email, format: { with: /\S+@\S+/},
             uniqueness: {case_sensitive: false}
-  validates :password, length: {minimum: 10, allow_blanks: true}
+  validates :password, length: {minimum: 10, allow_blank: true}
 
   class << self
     attr_accessor :default_image_type
