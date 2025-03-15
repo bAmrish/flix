@@ -616,3 +616,28 @@ section.errors {
   clip-path: inset(0 round 50px);
   object-fit: cover;
 }
+
+
+
+.genres {
+    @extend .col-md-9;
+
+    .add-genre {
+      @extend .col-md-12;
+      margin-bottom: 20px;
+      form {
+        display: flex;
+        flex-direction: row;
+        gap: 10px;
+    
+        input#name {
+          margin-bottom: 0;
+        }
+    
+        input.add-button {
+          margin-top: 0;
+          width: auto;
+        }
+      }
+    }
+}

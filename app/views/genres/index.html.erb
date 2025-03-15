@@ -1,0 +1,31 @@
+<h1> Manage Genres </h1>
+<div class="genres">
+  <div class="add-genre">
+    <div>
+      <% if @genre.present? %>
+        <%= render "shared/errors", object: @genre %>
+      <% end %>
+      <%= form_with(url: genres_path) do |f| %>
+        <%= f.text_field :name%>
+        <%= f.submit "Add Genre", class: "add-button" %>
+      <% end %>
+    </div>
+  </div>
+  <div class="all-genres">
+    <ul  class="list-group ">
+      <li class="list-group-item active list-group-item-primary"> 
+          <span class="name">All Genres</span>
+      </li>
+      <% @genres.each do |genre|%>
+        <li class="list-group-item align-middle"> 
+          <div class="row">
+            <div class="name align-middle col-md-9"><%= genre.name %></div>
+            <div class="col-md-3 text-end">
+              <%= button_to "Delete", genre_path(genre), method: :delete, class: "btn btn-danger" %>
+            </div>
+          </div>
+        </li>
+      <% end %>
+    </ul>
+  </section>
+</div>
