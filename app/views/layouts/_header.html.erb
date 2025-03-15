@@ -10,10 +10,20 @@
       </li>
     </ul>
     <ul class="right">
-      <li>
-        <%= link_to "Login", login_path, class: "button" %>
-        <%= link_to "Sign Up", signup_path, class: "button" %>
-      </li>
+      <% if is_logged_in? %>
+        <li>
+          <!-- <%= profile_image current_user %> -->
+          <%= link_to @current_user.name, current_user %>
+        </li>
+        <li>
+          <%= link_to "⚙", edit_user_path(@current_user)%>
+        </li>
+      <% else %>
+        <li>
+          <%= link_to "Login", login_path, class: "button" %>
+          <%= link_to "Sign Up", signup_path, class: "button" %>
+        </li>
+      <% end %>
     </ul>
   </nav>
 </header>
