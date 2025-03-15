@@ -5,12 +5,14 @@
       <li>
         <%= link_to "All Movies", movies_path %>
       </li>
-      <li>
-        <%= link_to "New Movie", new_movie_path %>
-      </li>
-      <li>
-        <%= link_to "All Users", users_path %>
-      </li>
+      <% if current_user_admin? %>
+        <li>
+          <%= link_to "New Movie", new_movie_path %>
+        </li>
+        <li>
+          <%= link_to "All Users", users_path %>
+        </li>
+      <% end %>
     </ul>
     <ul class="right">
       <% if is_logged_in? %>
