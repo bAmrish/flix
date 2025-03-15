@@ -59,7 +59,7 @@
         <h4> Genres </h4>
         <ul>
           <% @genres.each do |genre| %>
-            <li><%= genre.name %></li>
+            <li><%= link_to genre.name, genre %></li>
           <% end %>
         </ul>
       <% end %>

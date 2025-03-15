@@ -19,7 +19,9 @@
       <% @genres.each do |genre|%>
         <li class="list-group-item align-middle"> 
           <div class="row">
-            <div class="name align-middle col-md-9"><%= genre.name %></div>
+            <div class="name align-middle col-md-9">
+              <%= link_to genre.name, genre %>
+            </div>
             <div class="col-md-3 text-end">
               <%= button_to "Delete", genre_path(genre), method: :delete, class: "btn btn-danger" %>
             </div>
