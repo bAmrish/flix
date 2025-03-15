@@ -34,6 +34,10 @@
             <p>
               <%= review.comment %>
             </p>
+            <p class="actions">
+              <%= link_to 'Edit', edit_movie_review_path(review.movie, review), class: 'button edit' %> 
+              <%= link_to 'Delete', [review.movie, review], data: {turbo_method: :delete, turbo_confirm: 'Are you sure?'}, class: 'button delete' %>
+            </p> 
           </div>
         </div>
       <% end %>
