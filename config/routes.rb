@@ -5,9 +5,10 @@ Rails.application.routes.draw do
     resources :reviews
   end
 
-  resource 'session', only: [:new, :create, :delete]
+  resource 'session', only: [:new, :create, :destroy]
   resources :users
 
   get 'signup' => 'users#new'
   get 'login' => 'sessions#new'
+  delete 'logout' => 'sessions#destroy'
 end

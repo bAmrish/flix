@@ -17,6 +17,7 @@ class SessionsController < ApplicationController
   end
 
   def destroy
-    
+    session.delete(:user_id)
+    redirect_to movies_path, status: :see_other, notice: 'You are successfully logged out!'
   end
 end
