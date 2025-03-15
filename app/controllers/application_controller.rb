@@ -17,6 +17,7 @@ private
 
   def require_signin
     unless is_logged_in?
+      session[:redirect_url] = request.url
       redirect_to login_path, notice: 'You need to be logged in.'
     end
   end
