@@ -20,11 +20,12 @@ class Movie < ApplicationRecord
     message: 'must be a PNG or JPG'
   } 
   validates :rating, inclusion: {in: RATINGS}
-
-
-  def self.released
-    where("released_on <= ?", Time.now).order("released_on desc")
-  end
+  
+  scope :released, -> { where("released_on <= ?", Time.now).order("released_on desc") }
+  scope :upcoming, -> { where("released_on >= ?", Time.now).order("released_on asc") }
+  scope :recent, -> (max = 5) { released.limit(max) }
+  scope :hits, -> { released.where("total_gross > ?", 250_000_000).order(total_gross: :desc)}
+  scope :flops, -> { released.where("total_gross <= ?", 250_000_000).order(total_gross: :asc)}
 
   def flop?
     total_gross <= 250_000_000

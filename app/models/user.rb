@@ -6,6 +6,10 @@ class User < ApplicationRecord
   has_many :favorites, dependent: :destroy
   has_many :favorite_movies, through: :favorites, source: :movie
   
+  scope :by_name, -> {order(name: :asc)}
+  scope :non_admins, -> {by_name.where(admin: false)}
+  scope :admins, -> {by_name.where(admin: true)}
+
   BASE_GRAVATAR_IMAGE = 'https://gravatar.com/avatar'
 
   validates :username, 

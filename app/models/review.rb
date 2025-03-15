@@ -11,6 +11,7 @@ class Review < ApplicationRecord
 
   validates :comment, length: {minimum: 25}
 
+  scope :recent_reviews, -> (max = 7) { limit(max).order(created_at: :desc) }
 
   def stars_as_percent
     (stars * 100.0)/STARS.size

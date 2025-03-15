@@ -5,7 +5,7 @@ class UsersController < ApplicationController
   before_action :require_logged_in_user, only: [:edit, :update]
   before_action :require_logged_in_or_admin_user, only: [:destroy]
   def index
-    @users = User.all
+    @users = User.non_admins
   end
 
   def show
