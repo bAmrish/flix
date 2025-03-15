@@ -3,13 +3,14 @@ class FavoritesController < ApplicationController
   before_action :set_movie
 
   def create  
-    @movie.favorites.create(user: current_user)
+    fave = current_user.favorites.find_by(movie: @movie)
+    @movie.favorites.create(user: current_user) unless fave
     redirect_to @movie
   end
 
   def destroy
-    like = current_user.favorites.find_by(movie: @movie)
-    like.destroy
+    fave = current_user.favorites.find_by(movie: @movie)
+    fave.destroy
     redirect_to @movie
   end
 
