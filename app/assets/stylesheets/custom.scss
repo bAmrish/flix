@@ -51,6 +51,13 @@ a:hover {
 }
 
 // Header and Nav
+a.button {
+  @extend .btn, .btn-outline-secondary;
+
+  .primary {
+    @extend .btn-outline-primary
+  }
+}
 
 header {
   background-color: $primary;
@@ -311,8 +318,16 @@ section.user {
     border: 1px solid $border-color;
     padding: 1rem;
 
+    .image {
+      @extend .col-md-3, .text-center;
+    }
+    .image img {
+      width: 100px;
+      box-shadow: $box-shadow;
+    }
+
     .details {
-      @extend .col-md-12, .text-start;
+      @extend .col-md-9, .text-start;
 
       .title {
         font-size: 1.15rem;

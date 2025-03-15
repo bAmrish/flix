@@ -1,6 +1,9 @@
 require 'digest'
 class User < ApplicationRecord
   has_secure_password
+  
+  has_many :reviews, dependent: :destroy
+
   BASE_GRAVATAR_IMAGE = 'https://gravatar.com/avatar'
 
   validates :username, 

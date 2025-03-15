@@ -2,7 +2,8 @@
   <%= form_with(model: [movie, review]) do |f| %>
     <%= render "shared/errors", object: review %>
     <%= f.label :name%>
-    <%= f.text_field :name%>
+    <%= f.text_field :name, value: review.user.name, disabled: true %>
+    
     <%= f.label :stars%>
     <% Review::STARS.each do |star| %>
       <span class="star">
