@@ -1,6 +1,8 @@
 class ReviewsController < ApplicationController
   before_action :set_movie
   before_action :require_signin, except: [:index]
+  before_action :set_review, only: [:edit, :update, :destroy]
+  before_action :require_current_user, only: [:edit, :update, :destroy]
 
   def index
     @reviews =@movie.reviews
@@ -23,13 +25,9 @@ class ReviewsController < ApplicationController
   end
 
   def edit
-    review_id = params[:id]
-    @review = Review.find(review_id)
   end
 
   def update
-    review_id = params[:id]
-    @review = Review.find_by(movie: @movie, id: review_id)
     if @review.update(review_params)
       redirect_to movie_reviews_path(@movie), notice: 'Review updated successfully!'
     else
@@ -38,8 +36,6 @@ class ReviewsController < ApplicationController
   end
 
   def destroy
-    review_id = params[:id]
-    @review = Review.find_by(movie: @movie, id: review_id)
     @review.destroy
     redirect_to movie_reviews_path(@movie), status: :see_other, alert: 'Review Deleted Successfully!'
   end
@@ -50,7 +46,17 @@ private
     @movie = Movie.find(movie_id)   
   end
 
+  def set_review
+    review_id = params[:id]
+    @review = Review.find_by(movie: @movie, id: review_id)
+  end
+
   def review_params
     params.require(:review).permit(:stars, :comment)
+  end
+
+  def require_current_user    
+    redirect_to root_path, alert: 'Unauthorized!' \
+        unless is_logged_in_user?(@review.user)
   end
 end
