@@ -10,7 +10,9 @@ class MoviesController < ApplicationController
   def show
     @movie = Movie.find(params[:id])
     @fans = @movie.fans
-    @fave = current_user.favorites.find_by(movie: @movie)
+    if is_logged_in?
+      @fave = current_user.favorites.find_by(movie: @movie)
+    end
     @genres = @movie.genres.order(:name)
   end
 

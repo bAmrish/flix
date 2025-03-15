@@ -1,4 +1,6 @@
 class GenresController < ApplicationController
+  before_action :require_signin, only: [:create, :destroy, :index]
+  before_action :require_admin, only: [:create, :destroy, :index]
   def index
     @genres = Genre.all
   end
