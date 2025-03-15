@@ -17,6 +17,10 @@ private
     current_user && current_user.admin?
   end
 
+  def logged_in_or_admin_user?(user)
+    current_user_admin? || is_logged_in_user?(user) 
+  end
+
   def require_signin
     unless is_logged_in?
       session[:redirect_url] = request.url
@@ -30,5 +34,9 @@ private
     end
   end
 
-  helper_method :current_user, :is_logged_in?, :is_logged_in_user?, :current_user_admin?
+  helper_method :current_user, 
+    :is_logged_in?, 
+    :is_logged_in_user?, 
+    :current_user_admin?, 
+    :logged_in_or_admin_user?
 end

@@ -2,8 +2,8 @@ class UsersController < ApplicationController
 
   before_action :require_signin, except: [:new, :create]
   before_action :set_user_from_request, only: [:edit, :update, :destroy]
-  before_action :require_logged_in_user, only: [:edit, :update, :destroy]
-
+  before_action :require_logged_in_user, only: [:edit, :update]
+  before_action :require_logged_in_or_admin_user, only: [:destroy]
   def index
     @users = User.all
   end
@@ -39,7 +39,7 @@ class UsersController < ApplicationController
   
   def destroy
     @user.destroy
-    session.delete(:user_id)
+    session.delete(:user_id) unless current_user_admin?
     redirect_to movies_url, alert: 'Account Deleted Successfully!'
   end
   
@@ -50,6 +50,11 @@ private
 
   def require_logged_in_user
     redirect_to movies_url, alert: "Unauthorized!" unless is_logged_in_user?(@user)
+  end
+
+  def require_logged_in_or_admin_user
+    redirect_to movies_url, alert: "Unauthorized!" \
+      unless logged_in_or_admin_user?(@user)
   end
 
   def set_user_from_request
