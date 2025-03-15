@@ -1,6 +1,8 @@
 class UsersController < ApplicationController
 
   before_action :require_signin, except: [:new, :create]
+  before_action :set_user_from_request, only: [:edit, :update, :destroy]
+  before_action :require_logged_in_user, only: [:edit, :update, :destroy]
 
   def index
     @users = User.all
@@ -25,11 +27,9 @@ class UsersController < ApplicationController
   end
 
   def edit
-    @user = User.find(params[:id])
   end
 
   def update
-    @user = User.find(params[:id])
     if @user.update(user_params)
       redirect_to @user, notice: 'Account updated successfully'
     else
@@ -38,7 +38,6 @@ class UsersController < ApplicationController
   end
   
   def destroy
-    @user = User.find(params[:id])  
     @user.destroy
     session.delete(:user_id)
     redirect_to movies_url, alert: 'Account Deleted Successfully!'
@@ -47,5 +46,13 @@ class UsersController < ApplicationController
 private
   def user_params
     params.require(:user).permit(:name, :email, :password, :password_confirmation, :username)
+  end
+
+  def require_logged_in_user
+    redirect_to movies_url, alert: "Unauthorized!" unless is_logged_in_user?(@user)
+  end
+
+  def set_user_from_request
+    @user = User.find(params[:id])  
   end
 end

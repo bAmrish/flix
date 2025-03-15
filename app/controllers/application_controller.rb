@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::Base
 
+private
   def current_user
     @current_user ||= User.find(session[:user_id]) if is_logged_in?
   end
@@ -8,7 +9,11 @@ class ApplicationController < ActionController::Base
     session[:user_id].present?
   end
 
-  helper_method :current_user, :is_logged_in?
+  def is_logged_in_user? (user)
+    return current_user == user
+  end
+
+  helper_method :current_user, :is_logged_in?, :is_logged_in_user?
 
   def require_signin
     unless is_logged_in?
