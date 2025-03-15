@@ -4,7 +4,9 @@ class Movie < ApplicationRecord
   has_many :favorites, dependent: :destroy
   has_many :fans, through: :favorites, source: :user
   has_many :critics, through: :reviews, source: :user
-
+  has_many :movie_genres, dependent: :destroy
+  has_many :genres, through: :movie_genres
+  
   RATINGS = %w"G PG PG-13 R NC-17"
   validates :title, presence: true
   validates :released_on, presence: true

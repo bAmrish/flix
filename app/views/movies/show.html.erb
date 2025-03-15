@@ -42,19 +42,28 @@
         <%= link_to 'Add Review', new_movie_review_path(@movie), { class: 'button primary' } %>
       </div>
   </div>
-  <% if @fans.present? %>
+ 
     <aside>
-      <h4> Fans </h4>
-      <ul>
-        <% @fans.each do |user| %>
-          <li>
-            <%= profile_image(user) %>
-            <%= link_to user.name, user %>
-          </li>
-        <% end %>
-      </ul>
+      <% if @fans.present? %>
+        <h4> Fans </h4>
+        <ul>
+          <% @fans.each do |user| %>
+            <li>
+              <%= profile_image(user) %>
+              <%= link_to user.name, user %>
+            </li>
+          <% end %>
+        </ul>
+      <% end %>
+      <% if @genres.present? %>
+        <h4> Genres </h4>
+        <ul>
+          <% @genres.each do |genre| %>
+            <li><%= genre.name %></li>
+          <% end %>
+        </ul>
+      <% end %>
     </aside>
-  <% end %>
 </section>
 
 <% if current_user_admin? %>
