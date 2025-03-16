@@ -1,5 +1,6 @@
 class Movie < ApplicationRecord
   before_save :set_slug
+  before_save :format_username
 
   has_many :reviews, -> {order(created_at: :desc)}, dependent: :destroy
   has_many :favorites, dependent: :destroy
@@ -55,5 +56,9 @@ class Movie < ApplicationRecord
 private
   def set_slug
     self.slug = title.parameterize
+  end
+
+  def format_username
+    self.username = username.downcase
   end
 end
