@@ -11,4 +11,7 @@ module MoviesHelper
     movie.released_on.strftime("%B %e, %Y")
   end
 
+  def poster_image_for (movie)
+    image_tag "placeholder.png"
+  end
 end

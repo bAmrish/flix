@@ -21,7 +21,7 @@
       <% @user.reviews.each do |review| %>
         <div class="review">
           <div class="image">
-            <%= image_tag(review.movie.image_file_name) %>
+            <%= poster_image_for review.movie %>
           </div>
           <div class="details">
             <span class="title">
@@ -50,7 +50,7 @@
     <h3> Favorite Movies </h3>
     <div class="favorite-movies">
       <% @favorite_movies.each do |movie| %>
-        <%= link_to image_tag(movie.image_file_name), movie %>
+        <%= link_to poster_image_for(movie), movie %>
       <% end %>
     </div>
   <%end%>
