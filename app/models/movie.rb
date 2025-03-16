@@ -21,6 +21,8 @@ class Movie < ApplicationRecord
   }
 
   validates :rating, inclusion: {in: RATINGS}
+
+  validate :acceptable_image
   
   scope :released, -> { where("released_on <= ?", Time.now).order("released_on desc") }
   scope :upcoming, -> { where("released_on >= ?", Time.now).order("released_on asc") }
@@ -55,5 +57,17 @@ class Movie < ApplicationRecord
 private
   def set_slug
     self.slug = title.parameterize
+  end
+
+  def acceptable_image
+    return unless poster_image.attached?
+
+    unless poster_image.blob.byte_size <= 1.megabytes
+      errors.add(:poster_image, 'Is too big. It should be less than 1 MB.')
+    end
+    acceptable_types = ['image/png', 'image/jpeg']
+    unless acceptable_types.include?(poster_image.content_type)
+      errors.add(:poster_image, 'Invalid type. Image must be PNG or JPEG.')
+    end
   end
 end
