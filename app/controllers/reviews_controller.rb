@@ -43,7 +43,7 @@ private
 
   def set_movie
     movie_id = params[:movie_id]
-    @movie = Movie.find(movie_id)   
+    @movie = Movie.find_by(slug: movie_id)   
   end
 
   def set_review
