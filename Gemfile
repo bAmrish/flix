@@ -14,9 +14,14 @@ gem 'bootstrap', '~> 5.3.3'
 # SCSS engine required by bootstrap to process scss files [https://github.com/tablecheck/dartsass-sprockets]
 gem 'dartsass-sprockets', '~> 3.2.0'
 
-# Use sqlite3 as the database for Active Record
-gem "sqlite3", ">= 1.4"
+group :development, :test do
+  # Use sqlite3 as the database for Active Record
+  gem "sqlite3", ">= 1.4"
+end
 
+group :production do
+  gem "pg",  "~> 1.5.9"
+end
 # Use the Puma web server [https://github.com/puma/puma]
 gem "puma", ">= 5.0"
 
