@@ -1,6 +1,5 @@
 class Movie < ApplicationRecord
   before_save :set_slug
-  before_save :format_username
 
   has_many :reviews, -> {order(created_at: :desc)}, dependent: :destroy
   has_many :favorites, dependent: :destroy
@@ -8,6 +7,8 @@ class Movie < ApplicationRecord
   has_many :critics, through: :reviews, source: :user
   has_many :movie_genres, dependent: :destroy
   has_many :genres, through: :movie_genres
+
+  has_one_attached :poster_image
   
   RATINGS = %w"G PG PG-13 R NC-17"
   validates :title, presence: true, uniqueness: { case_sensitive: false }
@@ -54,9 +55,5 @@ class Movie < ApplicationRecord
 private
   def set_slug
     self.slug = title.parameterize
-  end
-
-  def format_username
-    self.username = username.downcase
   end
 end
